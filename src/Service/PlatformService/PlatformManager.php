@@ -3,12 +3,13 @@
 namespace App\Service\PlatformService;
 
 use App\Service\PlatformService\Enum\Platform;
+use App\Service\PlatformService\Interfaces\PlatformInterface;
 use App\Service\PlatformService\platforms\telegram\Telegram;
 use App\Service\PlatformService\platforms\vkontakte\Vkontakte;
 
 class PlatformManager
 {
-    public function get(int $id)
+    public function get(int $id): PlatformInterface
     {
         $class = match (Platform::from($id)) {
             Platform::Vkontakte => Vkontakte::class,

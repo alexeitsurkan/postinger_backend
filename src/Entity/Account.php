@@ -31,10 +31,6 @@ class Account
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: PublicPlace::class, orphanRemoval: true)]
     private $publicPlaces;
 
-    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'accounts')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $project;
-
     public function __construct()
     {
         $this->publicPlaces = new ArrayCollection();
@@ -122,17 +118,4 @@ class Account
 
         return $this;
     }
-
-    public function getProject(): ?Project
-    {
-        return $this->project;
-    }
-
-    public function setProject(?Project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
 }

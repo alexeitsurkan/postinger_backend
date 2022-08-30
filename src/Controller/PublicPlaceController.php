@@ -2,24 +2,22 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\PublicPlaceService\PublicPlaceService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Routing\Annotation\Route;
 
-#[IsGranted('ROLE_USER')]
 class PublicPlaceController extends AbstractController
 {
-    #[Route('/public_places/add', name: 'public_places_add', methods: ['POST'])]
-    public function add(): JsonResponse
+    #[Route('/public-places', name: 'public-places', methods: ['POST'])]
+    public function get(Request $request, PublicPlaceService $placeService): JsonResponse
     {
-        //todo a.curkan сделать
-    }
+        $params = json_decode($request->getContent(),true);
+        $params['user_id'] = $this->getUser()->getId();
+        $result = $placeService->{$params['method']}($params);
 
-    #[Route('/public_places/delete', name: 'public_places_delete', methods: ['POST'])]
-    public function delete(): JsonResponse
-    {
-        //todo a.curkan сделать
+        return new JsonResponse($result);
     }
 }

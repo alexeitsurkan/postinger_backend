@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Service\PlatformService\resources;
+namespace App\Service\PlatformService\models;
 
-class PublicPlacesData
+class PublicPlacesGetItem
 {
-    private int $id;
-    private string $name;
-    private string $photo;
+    public int $id;
+    public string $name;
+    public string $photo;
 
     public function getId(){
         return $this->id;
