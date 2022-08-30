@@ -29,6 +29,7 @@ class UserController extends AbstractController
         //todo a.curkan сделать
     }
 
+
     #[Route('/users/add', name: 'users_add', methods: ['POST'])]
     public function add(): JsonResponse
     {
