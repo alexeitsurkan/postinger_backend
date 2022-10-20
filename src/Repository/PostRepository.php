@@ -56,10 +56,13 @@ class PostRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
-    public function getAllForCurrentTime(int $time): array
+    public function getAllForCurrentDate(string $date): array
     {
+        $time = strtotime($date);
+
         return $this->createQueryBuilder('p')
-            ->andWhere('p.datetime = :time')
+            ->andWhere('p.datetime => :time')
+            ->andWhere('p.datetime <= :time+60')
             ->setParameter('time', $time)
             ->getQuery()
             ->getResult()

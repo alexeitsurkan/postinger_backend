@@ -18,7 +18,7 @@ class PublicPlace
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string', length: 255)]
     private $sid;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'publicPlaces')]
@@ -50,12 +50,12 @@ class PublicPlace
         return $this;
     }
 
-    public function getSid(): ?int
+    public function getSid(): ?string
     {
         return $this->sid;
     }
 
-    public function setSid(int $sid): self
+    public function setSid(string $sid): self
     {
         $this->sid = $sid;
 
