@@ -5,12 +5,15 @@ namespace App\Service\PostService;
 use App\Entity\Post;
 use App\Entity\PublicPlace;
 use App\Entity\User;
+use App\Service\PlatformService\PlatformManager;
 use Doctrine\Persistence\ManagerRegistry;
 
 class PostService
 {
-    public function __construct(private ManagerRegistry $doctrine)
-    {
+    public function __construct(
+        private ManagerRegistry $doctrine,
+        private PlatformManager $platformManager
+    ) {
     }
 
     /**
@@ -36,8 +39,8 @@ class PostService
 
     public function add(array $params): bool
     {
-        $user = $this->doctrine->getRepository(User::class)->find($params['user_id']);
-        $place = $this->doctrine->getRepository(PublicPlace::class)->find($params['public_place_id']);
+        $user     = $this->doctrine->getRepository(User::class)->find($params['user_id']);
+        $place    = $this->doctrine->getRepository(PublicPlace::class)->find($params['public_place_id']);
         $dateTime = new \DateTime();
 
         $post = new Post();
@@ -70,5 +73,17 @@ class PostService
         if ($entity = $postRepository->find($params['id'])) {
             $postRepository->remove($entity, true);
         }
+    }
+
+    public function send(Post $post): bool
+    {
+        foreach ($post->getPublicPlaces() as $place) {
+            if ($platformId = $place->getAccount()?->getPlatform()) {
+                $platform = $this->platformManager->get($platformId);
+                $platform->post()->send($post,$place);
+            }
+        }
+
+        return true;
     }
 }
