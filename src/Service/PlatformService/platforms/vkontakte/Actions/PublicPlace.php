@@ -15,7 +15,7 @@ class PublicPlace implements PublicPlaceInterface
 
     /**
      * @param Account $account
-     * @return array|PublicPlacesGetItem[]
+     * @return PublicPlacesGetItem[]
      * @throws \VK\Exceptions\Api\VKApiAccessGroupsException
      * @throws \VK\Exceptions\VKApiException
      * @throws \VK\Exceptions\VKClientException

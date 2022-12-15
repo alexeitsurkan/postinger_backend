@@ -29,7 +29,7 @@ class AccountService
         return $query->getArrayResult();
     }
 
-    public function add(array $params): bool
+    public function add(array $params): int
     {
         $user     = $this->doctrine->getRepository(User::class)->find($params['user_id']);
 
@@ -40,7 +40,7 @@ class AccountService
         $account->setAccessToken($params['token']);
         $this->doctrine->getRepository(Account::class)->add($account, true);
 
-        return true;
+        return $account->getId();
     }
 
     public function delete(array $params): void

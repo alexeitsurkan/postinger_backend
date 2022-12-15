@@ -46,7 +46,7 @@ class PostService
         $post = new Post();
         $post->setUser($user);
         $post->setText($params['text']);
-        $post->setStatus($params['status']);
+        $post->setStatus(0);
         $post->setDatetime($dateTime);
 
         $post->addPublicPlace($place);

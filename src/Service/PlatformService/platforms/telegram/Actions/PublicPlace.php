@@ -20,6 +20,6 @@ class PublicPlace implements PublicPlaceInterface
      */
     public function pull(Account $account): array
     {
-        throw new PlatformServiceException('метод отсутствует!');
+        return [];
     }
 }
