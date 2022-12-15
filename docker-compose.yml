@@ -24,7 +24,7 @@ services:
       - ./:/app
     working_dir: /app
     environment:
-      XDEBUG_CONFIG: "client_host=192.168.236.1 client_port=9000"
+      XDEBUG_CONFIG: "client_host=192.168.235.1 client_port=9000"
       PHP_IDE_CONFIG: "serverName=Docker"
     networks:
       - internal
@@ -52,4 +52,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.236.0/28
+        - subnet: 192.168.235.0/28
