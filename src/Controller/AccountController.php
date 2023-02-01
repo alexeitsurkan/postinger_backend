@@ -20,7 +20,7 @@ class AccountController extends AbstractController
     {
         $params = json_decode($request->getContent(),true);
         $params['user_id'] = $this->getUser()->getId();
-        $result = $platformManager->get($params['platform_id'])->account($accountService)->{$params['method']}($params);
+        $result = $accountService->{$params['method']}($params);
 
         return new JsonResponse($result);
     }
