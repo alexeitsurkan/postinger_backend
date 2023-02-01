@@ -18,7 +18,7 @@ class Post implements PostInterface
 
     public function send(EntityPost $post, EntityPublicPlace $place): bool
     {
-        if ($account = $place->getAccount()) {
+        if (!$account = $place->getAccount()) {
             throw new PlatformServiceException('Account not found!', 500);
         }
         try {
