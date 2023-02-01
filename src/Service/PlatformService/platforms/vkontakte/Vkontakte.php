@@ -2,7 +2,10 @@
 
 namespace App\Service\PlatformService\platforms\vkontakte;
 
+use App\Service\AccountService\AccountService;
+use App\Service\PlatformService\Interfaces\AccountInterface;
 use App\Service\PlatformService\Interfaces\PlatformInterface;
+use App\Service\PlatformService\platforms\vkontakte\Actions\Account;
 use App\Service\PlatformService\platforms\vkontakte\Actions\Post;
 use App\Service\PlatformService\platforms\vkontakte\Actions\PublicPlace;
 use VK\Client\VKApiClient;
@@ -20,6 +23,12 @@ class Vkontakte implements PlatformInterface
      * @var PublicPlace
      */
     private $publicPlace;
+
+
+    /**
+     * @var Account
+     */
+    private $account;
 
     public function __construct()
     {
@@ -42,5 +51,15 @@ class Vkontakte implements PlatformInterface
         }
 
         return $this->publicPlace;
+    }
+
+
+    public function account(AccountService $accountService): AccountInterface
+    {
+        if (!$this->account) {
+            $this->account = new Account($this->client,$accountService);
+        }
+
+        return $this->account;
     }
 }
