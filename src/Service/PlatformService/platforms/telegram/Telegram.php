@@ -5,6 +5,7 @@ namespace App\Service\PlatformService\platforms\telegram;
 use App\Service\PlatformService\Interfaces\PlatformInterface;
 use App\Service\PlatformService\Interfaces\PublicPlaceInterface;
 use App\Service\PlatformService\platforms\telegram\Actions\Post;
+use App\Service\PlatformService\platforms\telegram\Actions\PublicPlace;
 use App\Service\TelegramSdk\TelegramApiClient;
 
 class Telegram implements PlatformInterface
